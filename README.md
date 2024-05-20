@@ -6,7 +6,7 @@
 此宏包旨在建立一个简单易用的宁夏大学学位论文 LaTeX 模板
 
 
-# ThuThesis
+# NxuThesis
 
 **NxuThesis** is an abbreviation of **N**ing**x**ia **U**niversity **Thesis** LaTeX Template.
 
