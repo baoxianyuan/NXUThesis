@@ -1,0 +1,50 @@
+\documentclass[degree=master]{nxuthesis}
+	% 学位 degree:
+	%   master（硕士） | doctor（博士）
+	% 学位类型 degree-type:
+	%   academic（学术学位，默认）| professional（专业学位）
+	% 语言 language
+	%   chinese（默认）| english
+	% 字体库 fontset
+	%   windows | mac | fandol | ubuntu
+	% 建议终版使用 Windows 平台的字体编译
+
+% 论文基本配置，加载宏包等全局配置
+\input{nxusetup}
+
+\begin{document}
+
+% 封面
+\maketitle
+
+
+% 使用授权的说明
+\copyrightpage
+% 将签字扫描后授权文件 scan-copyright.pdf 替换原始页面
+% \copyrightpage[file=scan-copyright.pdf]
+
+\frontmatter
+\input{chapter/abstract}
+
+% 目录
+\tableofcontents
+
+% 正文部分
+\mainmatter
+\input{chapter/chap01}
+\input{chapter/chap02}
+
+
+% 其他部分
+\backmatter
+
+% 参考文献
+\input{chapter/references}
+
+% 致谢
+\input{chapter/acknowledgements}
+
+% 个人简介及攻读硕士/博士学位期间论文发表情况
+\input{chapter/resume}
+
+\end{document}
