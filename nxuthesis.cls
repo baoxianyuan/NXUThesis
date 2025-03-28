@@ -6,7 +6,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2024 by Xianyuan Bao <baoxianyuan@126.com>
+%% Copyright (C) 2024-2025 by Xianyuan Bao <baoxianyuan@126.com>
 %% 
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
@@ -21,7 +21,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}[2017/04/15]
 \ProvidesClass{nxuthesis}
-[2024/05/04 1.0.0 Ningxia University Thesis Template]
+[2025/03/28 2.0.0 Ningxia University Thesis Template]
 \newcommand\nxu@error[1]{%
   \ClassError{nxuthesis}{#1}{}%
 }
@@ -59,7 +59,7 @@
 }
 \hyphenation{Nxu-Thesis}
 \def\nxuthesis{nxuthesis}
-\def\version{1.0.0}
+\def\version{2.0.0}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -415,10 +415,10 @@
 \newcommand\nxu@set@geometry{%
     \geometry{
       top        = 3.0cm,
-      bottom     = 2.5cm,
+      bottom     = 3.0cm,
       left       = 3.0cm,
       right      = 2.5cm,
-      headheight = 2.8cm,
+      headheight = 2.5cm,
       headsep    = 0.0cm,
       footskip   = 0.8cm,
     }%
@@ -454,9 +454,9 @@
       \def\contentsname{目\quad 录}%
       \def\nxu@denotation@name{符号和缩略语说明}%
       \ifnxu@degree@master
-        \def\nxu@resume@name{个人简介及攻读硕士学位期间论文发表情况}%
+        \def\nxu@resume@name{攻读学位期间发表的相关学术成果}%
       \else % degree = doctor
-        \def\nxu@resume@name{个人简介及攻读博士学位期间论文发表情况}%
+        \def\nxu@resume@name{攻读学位期间发表的相关学术成果}%
       \fi
   \else
     \ifnxu@main@language@english
@@ -573,7 +573,7 @@
 \nxu@set@punctuations
 \nxu@option@hook{language}{\nxu@set@punctuations}
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{10.5bp}{18bp}%
+  \@setfontsize\normalsize{12bp}{20bp}%
   \abovedisplayskip 6bp%
   \abovedisplayshortskip 6bp%
   \belowdisplayshortskip 6bp%
@@ -1473,7 +1473,7 @@
     			%\vskip-2\headrulewidth\vskip-1pt
     		}}
     \fancyhead[L]{%
-      \xiaowu
+      \wuhao
       \ifnxu@main@language@chinese
         \ifnxu@degree@doctor
           宁夏大学博士学位论文
@@ -1487,14 +1487,14 @@
       \fi
       }%
     \fancyhead[R]{%
-      \xiaowu
+      \wuhao
       \ifnxu@main@language@chinese
         \leftmark
       \else
         \MakeUppercase{\leftmark}%
       \fi
       }%
-    \fancyfoot[LE,RO]{\xiaowu -- {\thepage} --}%
+    \fancyfoot[C]{\xiaowu \thepage}%
     \let\@mkboth\markboth
     \def\chaptermark##1{%
       \markboth{%
@@ -1689,15 +1689,15 @@
 \nxu@define@key{
   figure-number-separator = {
     name    = figure@number@separator,
-    default = {.},
+    default = {-},
   },
   table-number-separator = {
     name    = table@number@separator,
-    default = {.},
+    default = {-},
   },
   equation-number-separator = {
     name    = equation@number@separator,
-    default = {.},
+    default = {-},
   },
   number-separator = {
     name    = number@separator,
@@ -1705,7 +1705,7 @@
   },
 }
 \renewcommand\thefigure{%
-  \xiaowu
+  %\wuhao
   \ifnum\c@chapter>\z@
     \thechapter
     \nxu@figure@number@separator
@@ -1713,7 +1713,7 @@
   \@arabic\c@figure
 }
 \renewcommand\thetable{%
-  \xiaowu
+  %\wuhao
   \ifnum\c@chapter>\z@
     \thechapter
     \nxu@table@number@separator
@@ -1721,7 +1721,7 @@
   \@arabic\c@table
 }
 \renewcommand\theequation{%
-  \xiaowu
+  \xiaosi
   \ifnum\c@chapter>\z@
     \thechapter
     \nxu@equation@number@separator
@@ -1736,9 +1736,9 @@
 \nxu@option@hook{number-separator}{\nxu@set@number@separator}
 \DeclareCaptionFont{nxu}{%
   \ifnxu@language@chinese
-    \fontsize{9bp}{13.5bp}\heiti
+    \fontsize{10.5bp}{10.5bp}\cusong\bfseries
   \else
-    \fontsize{9bp}{12.65bp}\selectfont
+    \fontsize{10.5bp}{10.5bp}\selectfont\bfseries
   \fi
 }
 \captionsetup{
@@ -1749,17 +1749,19 @@
   tableposition  = top,
 }
 \captionsetup[sub]{font=nxu}
+\captionsetup[figure][bi-second]{name=Figure}%设置英文图开头为Figure
+\captionsetup[table][bi-second]{name=Table}%设置英文表开头为Table
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \newcommand\nxu@set@table@font{
   \ifnxu@language@chinese
     \def\nxu@table@font{%
-      \fontsize{9bp}{13.5bp}\selectfont
+      \fontsize{10.5bp}{10.5bp}\selectfont
       \renewcommand\arraystretch{1.42}%
     }%
   \else
     \def\nxu@table@font{%
-      \fontsize{9bp}{13.5bp}\selectfont
+      \fontsize{10.5bp}{10.5bp}\selectfont
       \renewcommand\arraystretch{1.47}%
     }%
   \fi
@@ -1779,9 +1781,9 @@
 \heavyrulewidth=1.5bp
 \lightrulewidth=1bp
 \AtEndOfPackageFile*{threeparttable}{
-  \g@addto@macro\TPT@defaults{\wuhao}
+  \g@addto@macro\TPT@defaults{\xiaowu}
 }
-\newcommand{\nxu@abstract@name}{摘要}
+\newcommand{\nxu@abstract@name}{摘\quad 要}
 \newcommand{\nxu@abstract@name@en}{Abstract}
 \ctexset{%
   chapter = {
@@ -1808,8 +1810,8 @@
 \newcommand\nxu@set@section@format{%
     \ctexset{%
       chapter = {
-        beforeskip = 16bp,
-        afterskip  = 20bp,
+        beforeskip = 20bp,
+        afterskip  = 28bp,
         %number     = \thechapter,
       },
       section = {
@@ -1828,45 +1830,45 @@
     \ifnxu@main@language@chinese
       \ctexset{%
         chapter = {
-          format      = \centering\sffamily\sanhao,
+          format      = \centering\sffamily\sanhao\bfseries,
           nameformat  = {},
           titleformat = {},
           name        = {第,章},
           aftername   = \quad,
-          number      = \zhnumber{\thechapter}
+          %number      = \zhnumber{\thechapter}
         },
         section = {
-          format     = \sffamily\fontsize{14bp}{14bp}\selectfont,
+          format     = \sffamily\fontsize{14bp}{14bp}\selectfont\bfseries,
           aftername  = \quad,
         },
         subsection = {
-          format     = \sffamily\fontsize{12bp}{12bp}\selectfont,
+          format     = \sffamily\fontsize{12bp}{12bp}\selectfont\bfseries,
           aftername  = \quad,
         },
         subsubsection = {
-          format     = \sffamily\fontsize{12bp}{20bp}\selectfont,
+          format     = \sffamily\fontsize{12bp}{20bp}\selectfont\bfseries,
           aftername  = \quad,
         },
       }%
     \else
       \ctexset{%
         chapter = {
-          format      = \centering\sffamily\bfseries\fontsize{16bp}{20bp}\selectfont,
+          format      = \centering\sffamily\bfseries\fontsize{16bp}{20bp}\selectfont\bfseries,
           nameformat  = \MakeUppercase,
           titleformat = \MakeUppercase,
           name        = \chaptername\space,
           aftername   = \space,
         },
         section = {
-          format     = \sffamily\bfseries\fontsize{14bp}{20bp}\selectfont,
+          format     = \sffamily\bfseries\fontsize{14bp}{20bp}\selectfont\bfseries,
           aftername  = \space,
         },
         subsection = {
-          format     = \sffamily\bfseries\fontsize{13bp}{20bp}\selectfont,
+          format     = \sffamily\bfseries\fontsize{13bp}{20bp}\selectfont\bfseries,
           aftername  = \space,
         },
         subsubsection = {
-          format     = \sffamily\bfseries\fontsize{12bp}{20bp}\selectfont,
+          format     = \sffamily\bfseries\fontsize{12bp}{20bp}\selectfont\bfseries,
           aftername  = \space,
         },
       }%
@@ -1934,10 +1936,12 @@
 \setcounter{tocdepth}{2}
 \renewcommand\tableofcontents{%
   \ifnxu@degree@graduate
-    \nxu@chapter*[]{\erhao \contentsname}%
+    \nxu@chapter*[]{\contentsname}%
   \else
     \nxu@chapter*[]{\contentsname}%
   \fi
+  \markboth{目录}{}%
+  \pagestyle{fancy}
   \@starttoc{toc}%
 }
 \nxu@define@key{
@@ -1955,11 +1959,11 @@
   \contentsmargin{\z@}%
     \ifnxu@main@language@chinese
       \titlecontents{chapter}
-        [\z@]{\mdseries \songti \sihao}
+        [\z@]{\mdseries \cusong \bfseries \sihao}
         {\contentspush{\thecontentslabel\quad}}{}
         {\nxu@leaders{\xiaosi \thecontentspage}}[\vspace{0.2cm}]%
       \titlecontents{section}
-        [2em]{\songti \xiaosi}
+        [2em]{\cusong \bfseries \xiaosi}
         {\contentspush{\thecontentslabel\quad}}{}
         {\nxu@leaders\thecontentspage}[\vspace{0.2cm}]%
       \titlecontents{subsection}
@@ -2001,11 +2005,19 @@
   author = {
     default = {姓名},
   },
+  author* = {
+  	default = {Name of author},
+  	name    = author@en,
+  },
   student-id = {
     name = student@id,
   },
   supervisor = {
     default = {导师姓名},
+  },
+  supervisor* = {
+  	default = {Name of supervisor},
+  	name    = supervisor@en,
   },
   associate-supervisor = {
     name = associate@supervisor,
@@ -2041,6 +2053,10 @@
 \nxu@define@key{
   department = {
     default = {土木与水利工程学院},
+  },
+  department* = {
+  	default = {Department},
+  	name = {department@en}
   },
   discipline = {
     % default = {土木与水利工程学院},
@@ -2114,7 +2130,7 @@
     July\or August\or September\or October\or November\or December%
   \fi
 }
-\newcommand\nxu@date@en@short[3]{\nxu@date@month{#2}, #1}
+\newcommand\nxu@date@en@short[3]{\nxu@date@month{#2} #1}
 \newcommand\nxu@underline[2][6em]{\hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt}
 \newcommand\nxu@uline[2][6em]{\uline{\hb@xt@ #1{\hss#2\hss}}}
 \newcommand\nxu@fixed@box[2]{%
@@ -2182,6 +2198,12 @@
   \ifnxu@include@spine@true
     \spine
   \fi
+  \ifnxu@degree@graduate
+    \ifnxu@thesis@type@thesis
+      \cleardoublepage
+      \nxu@titlepage@en
+    \fi
+  \fi
   \clearpage
 }
 \newcommand\nxu@titlepage{%
@@ -2189,6 +2211,7 @@
   \nxu@titlepage@thesis
   \nxu@reset@main@language
 }
+\newCJKfontfamily{\cusong}[AutoFakeBold={2.17}]{SimSun}
 \newcommand\nxu@titlepage@thesis{%
   \thispagestyle{empty}%
   % \null\vskip 8.1pt%
@@ -2202,23 +2225,22 @@
     \nxu@titlepage@name
     \vskip 0.68cm
     \nxu@title@page@degree@category\par
+    \nxu@title@page@degree@field\par
     \vskip 0.6cm
     \begingroup
-      \sffamily\fontsize{22bp}{30bp}\selectfont
+      \cusong\bfseries\fontsize{22bp}{30bp}\selectfont
       \nxu@title\par
     \endgroup
-    \vskip 8pt
-    \begingroup
-      \fontsize{16bp}{24bp}\selectfont
-      \nxu@title@en\par
-    \endgroup
-    \vskip 24.1pt%
+    %\vskip 8pt
+    %\vskip 24.1pt%
     \vfill
     \begingroup
       \fontsize{14bp}{21bp}\songti
       \nxu@titlepage@info\par
     \endgroup
-    \vskip 62pt%
+    \vskip 42pt%
+    \nxu@titlepage@date
+    \vskip 20pt%
     \fi
   \endgroup
   \clearpage
@@ -2244,7 +2266,7 @@
 	  \nxu@topinfo@iteml{密级}{\nxu@secret@level}
 	}{
 	  \nxu@topinfo@itemr{单位代码}{\nxu@code}
-	  \nxu@topinfo@itemr{学号}{\nxu@student@id}
+	  \nxu@topinfo@itemr{}{}
 	}\par
 }
 \newcommand\nxu@titlepage@topinfo@tabular[5]{%
@@ -2254,9 +2276,11 @@
 	  \makebox[6em][l]{ ##2 }\\[3bp]
 	}%
 	\def\nxu@topinfo@itemr##1##2{%
-	  \nxu@pad{#2}{\nxu@fixed@box{#2}{##1}}%
-	  \nxu@pad{#3}{：}%
-	  \makebox[6em][l]{ ##2 }\\[3bp]
+		\nxu@pad{#2}{\nxu@fixed@box{#2}{##1}}%
+	    \ifx##2\@empty\else
+	      \nxu@pad{#3}{：}%
+	    \fi
+	    \makebox[3em][l]{ ##2 }\\[3bp]
 	}%
 	\begin{tabular}{l}%
 		#4%
@@ -2268,7 +2292,7 @@
 }
 \newcommand\nxu@title@page@degree@category{%
   \begingroup
-    \fontsize{18bp}{22bp}\selectfont
+    \fontsize{22bp}{24bp}\selectfont
     \ifLuaTeX
       \fontspec{\CJK@family}%
       \ltjsetparameter{kanjiskip = {1bp}}%
@@ -2277,37 +2301,52 @@
       \renewcommand\CJKglue{\hspace{1bp}}%
     \fi
     \ifnxu@thesis@type@thesis
-      \ifnxu@degree@type@academic
-      	\ifnxu@degree@master
-      		硕士学位论文
-      	\else
-      		\ifnxu@degree@doctor
-      			博士学位论文
-      		\fi
-      	\fi
-      \else
-      	\ifnxu@degree@type@professional
-      		专业学位论文
-      \fi
+    	\ifnxu@degree@master
+    		硕士学位论文
+    	\else
+    		\ifnxu@degree@doctor
+    			博士学位论文
+    	\fi
     \fi
     \par
   \endgroup
 }
+\newcommand\nxu@title@page@degree@field{%
+	\begingroup
+		\fontsize{12bp}{18bp}\selectfont
+		\ifLuaTeX
+			\fontspec{\CJK@family}%
+			\ltjsetparameter{kanjiskip = {1bp}}%
+		\else
+			\CJKfamily+{}%
+			\renewcommand\CJKglue{\hspace{1bp}}%
+		\fi
+		\ifnxu@thesis@type@thesis
+			\ifnxu@degree@type@academic
+				（学术学位）
+			\else
+				\ifnxu@degree@type@professional
+					（专业学位）
+			\fi
+		\fi
+	\par
+	\endgroup
+}
 \newcommand\nxu@titlepage@info{%
-  \nxu@titlepage@info@tabular{0.0cm}{4.54cm}{4.44cm}{0.60cm}{%
-  	\nxu@info@item{学位申请人}{}{\nxu@author}%
+  \nxu@titlepage@info@tabular{0.0cm}{2.54cm}{2.44cm}{0.60cm}{%
+  	\nxu@info@item{姓名}{}{\nxu@author}%
+  	\nxu@info@item{学号}{}{\sihao\nxu@student@id}%
   	\nxu@info@item{指导教师}{\nxu@name@title}{\nxu@supervisor}%
-  	\nxu@info@item{合作指导教师}{\nxu@name@title}{\nxu@co@supervisor}%
+  	\nxu@info@item{合作导师}{\nxu@name@title}{\nxu@co@supervisor}%
   	\ifnxu@degree@type@academic
-  		\nxu@info@item{申请学位门类级别}{}{\nxu@degree@category}%
-  		\nxu@info@item{专业名称}{}{\nxu@discipline}%
+  		\nxu@info@item{学院}{}{\nxu@department}%
+  		\nxu@info@item{专业}{}{\nxu@discipline}%
   	\else
-  		\nxu@info@item{申请学位类别}{}{\nxu@degree@category}%
-  		\nxu@info@item{专业领域名称}{}{\nxu@discipline}%
+  		\nxu@info@item{培养单位}{}{\nxu@department}%
+  		\nxu@info@item{专业领域}{}{\nxu@discipline}%
   	\fi
   	\nxu@info@item{研究方向}{}{\nxu@field}%
-    \nxu@info@item{所在学院}{}{\nxu@department}%
-    \nxu@info@item{论文完成日期}{}{\sihao\nxu@format@date{\nxu@date@zh@digit}{\nxu@date}}%
+    \nxu@info@item{申请学位}{}{\nxu@degree@category}%
   }\par
 }
 \newcommand\nxu@titlepage@info@tabular[5]{%
@@ -2315,7 +2354,7 @@
     \ifx##3\@empty\else
       \nxu@pad{#2}{\nxu@fixed@box{#3}{##1}}%
       \nxu@pad{#4}{：}%
-      \uline{ \nxu@pad{14em}{\hfill ##2{##3} }}\\[7bp]
+      \uline{ \nxu@pad{18em}{\hfill ##2{##3} }}\\[12bp]
     \fi
   }%
   \hspace{#1}%
@@ -2323,6 +2362,85 @@
     \renewcommand\arraystretch{1}%
     #5%
   \end{tabular}%
+}
+\newcommand\nxu@titlepage@date{%
+	\begingroup
+		\sihao
+		\ifLuaTeX
+			\ltjsetparameter{kanjiskip = {1bp}}%
+		\else
+			\renewcommand\CJKglue{\hspace{1bp}}%
+		\fi
+		\nxu@format@date{\nxu@date@zh@digit@short}{\nxu@date}\par
+	\endgroup
+}
+\newcommand{\nxu@titlepage@en}{%
+	\thispagestyle{empty}%
+	\nxusetup{language = english}%
+	\begingroup
+		\centering
+		\null\vskip 0cm
+		\begingroup
+			\sffamily\bfseries\fontsize{16bp}{30bp}\selectfont
+			\nxu@titlepage@en@degree\par
+		\endgroup
+		\vskip 4.5cm
+		\nxu@titlepage@en@title
+		\vfill
+		\begingroup
+			\fontsize{16bp}{24bp}\selectfont
+			\nxu@titlepage@en@info
+		\endgroup
+		\vskip 5.0cm
+		\nxu@titlepage@en@address
+	\endgroup
+	\nxu@reset@main@language
+	\clearpage
+	\restoregeometry
+}
+\newcommand\nxu@titlepage@en@degree{%
+	A Dissertation Submitted to Ningxia University\par
+	for the Degree of
+	\ifnxu@thesis@type@thesis
+		\ifnxu@degree@master
+			Master
+		\else
+			\ifnxu@degree@doctor
+				Doctor
+		\fi
+	\fi
+	\par
+}
+\newcommand\nxu@titlepage@en@title{%
+	\begingroup
+		\sffamily\bfseries\fontsize{18bp}{32bp}\selectfont
+		\nxu@title@en\par
+	\endgroup
+}
+\newcommand\nxu@titlepage@en@info{%
+	\nxu@titlepage@en@info@tabular{8em}{0.5em}{8em}{
+		\nxu@titlepage@en@info@item{Author}{\nxu@author@en}
+		\nxu@titlepage@en@info@item{Supervisor}{\nxu@supervisor@en}
+	}\par
+}
+\newcommand\nxu@titlepage@en@info@tabular[4]{%
+	\def\nxu@titlepage@en@info@item##1##2{%
+		\nxu@pad{#1}{\bfseries \makebox[#1][r]{##1} }%
+		\nxu@pad{#2}{\bfseries \makebox[#2][l]{:} }%
+		\nxu@pad{#3}{\makebox[#3][l]{##2} }\\[8bp]
+	}%
+	\begin{tabular}{l}%
+		#4%
+	\end{tabular}%
+}
+\newcommand\nxu@titlepage@en@address{%
+	\fontsize{14bp}{30bp}\selectfont
+	\begingroup
+		\nxu@department@en\par
+ 		Ningxia University\par
+		Yinchuan, P.R. China\par
+		\nxu@format@date{\nxu@date@en@short}{\nxu@date}\par
+	\endgroup
 }
 \newcommand\copyrightpage[1][]{%
   \cleardoublepage
@@ -2350,42 +2468,45 @@
 \newcommand{\nxu@authorization@frontdate}{%
   日\hspace{2em} 期：}
 \newcommand\nxu@copyright@page@graduate{%
-  \null\vskip 30bp%
+  \null\vskip 5bp%
   \begingroup
 	\begin{center}
-		\sffamily\fontsize{22bp}{30bp}\selectfont
-		\nxu@stretch{5.4cm}{独创性声明}
+		\sffamily\fontsize{16bp}{32bp}\selectfont\bfseries
+		学位论文原创性声明
 	\end{center}
   \endgroup
-  \vskip 12bp%
+  \vskip 14bp%
   \begingroup
-	  \fontsize{12bp}{20bp}\selectfont
-	  本人声明所呈交的论文是我个人在导师指导下进行的研究工作及取得的研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果，也不包含为获得宁夏大学或其它教育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。\par
+	  \fontsize{14bp}{20bp}\selectfont
+	  \hspace{2em}本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究所取得的成果。除文中已经注明引用的内容外，本学位论文不包含其他个人或集体已发表或撰写过的科研成果。对本文的研究做出贡献的个人和集体，均已在文中以明确方式标明。本声明的法律责任由本人承担。\par
   \endgroup
   \vskip 30bp
   \begingroup
-  	\fontsize{12bp}{20bp}\selectfont
-  	研究生签名：\hspace{12em}时间：\hspace{4em}年\hspace{2em}月\hspace{2em}日\par
+  	\fontsize{14bp}{20bp}\selectfont
+  	论文作者签名：\hspace{8em}签字日期：\hspace{3em}年\hspace{1.5em}月\hspace{1.5em}日\par
   \endgroup
-  \vskip 4.00cm 
+  \vskip 3.80cm 
   \begingroup
     \begin{center}
-    	\sffamily\fontsize{22bp}{30bp}\selectfont
-    	关于论文使用授权的说明
+    	\sffamily\fontsize{16bp}{32bp}\selectfont\bfseries
+    	学位论文版权使用授权书
     \end{center}
   \endgroup
-  \vskip 12bp%
+  \vskip 16bp%
   \begingroup
-    \fontsize{12bp}{20bp}\selectfont
-    本人完全了解宁夏大学有关保留、使用学位论文的规定，即：学校有权保留送交论文的复印件和磁盘，允许论文被查阅和借阅，可以采用影印、缩印或扫描等复制手段保存、汇编学位论文。同意宁夏大学可以用不同方式在不同媒体上发表、传播学位论文的全部或部分内容。\par
-    \textbf{（保密的学位论文在解密后应遵守此协议）}\par
+    \fontsize{14bp}{20bp}\selectfont
+    \hspace{2em}本学位论文作者和指导教师完全了解宁夏大学有关保留、使用学位论文的规定：学校有权保留并向国家有关部门或机构送交学位论文的复印件和电子版；允许本学位论文被查阅和借阅；学校可以将本学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印或其他复制手段保存和汇编本学位论文。\par
+    \vskip 14bp
+    本学位论文属于：保密$\boxempty$ \hspace{2em}在\uline{\hspace{2em}}年解密后适用本授权书\par
+    \vskip 14bp
+    \hspace{8em}不保密$\boxempty$
   \endgroup
   \vskip 30bp
   \begingroup
-  \fontsize{12bp}{20bp}\selectfont
-  研究生签名：\hspace{12em}时间：\hspace{4em}年\hspace{2em}月\hspace{2em}日\par
+  \fontsize{14bp}{20bp}\selectfont
+  论文作者签名：\hspace{8.4em}导师签名：\par
   \vskip 28bp
-  导师签名：\hspace{13em}时间：\hspace{4em}年\hspace{2em}月\hspace{2em}日\par
+  签字日期：\hspace{3em}年\hspace{1.2em}月\hspace{1.2em}日\hspace{2em}签字日期：\hspace{3em}年\hspace{1.2em}月\hspace{1.2em}日\par
   \endgroup
 }
 \nxu@define@key{
@@ -2423,7 +2544,7 @@
   \fi
 }{%
   \par
-  %\null\par
+  \null\par
   \noindent
   \textbf{关键词：}%
   \nxu@clist@use{\nxu@keywords}{，}%
@@ -2440,9 +2561,9 @@
   \fi
 }{%
   \par
-  %\null\par
+  \null\par
   \noindent
-  \textbf{Keywords:}\space
+  \textbf{Key words:}\space
   \nxu@clist@use{\nxu@keywords@en}{, }%
   \ifnxu@degree@graduate
     \vspace*{\stretch{1}}%
@@ -2472,6 +2593,7 @@
   \@mainmatterfalse
   \nxu@end@appendix@ref@section
   \nxu@chapter*{\nxu@acknowledgements@name}%
+  \markboth{致谢}{}%
 }{%
 }
 \let\acknowledgement\acknowledgements

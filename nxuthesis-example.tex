@@ -14,7 +14,7 @@
 
 \begin{document}
 
-% 封面
+% 生成封面页
 \maketitle
 
 
@@ -24,6 +24,7 @@
 % \copyrightpage[file=scan-copyright.pdf]
 
 \frontmatter
+% 摘要
 \input{chapter/abstract}
 
 % 目录
@@ -33,18 +34,24 @@
 \mainmatter
 \input{chapter/chap01}
 \input{chapter/chap02}
+\input{chapter/chap03}
+\input{chapter/chap04}
 
 
 % 其他部分
 \backmatter
 
 % 参考文献
-\input{chapter/references}
+\bibliography{ref/refs}
+
+% 附录
+\appendix
+\input{chapter/appendix}
 
 % 致谢
 \input{chapter/acknowledgements}
 
-% 个人简介及攻读硕士/博士学位期间论文发表情况
+% 攻读学位期间发表的相关学术成果 
 \input{chapter/resume}
 
 \end{document}
