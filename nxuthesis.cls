@@ -1810,17 +1810,17 @@
 \newcommand\nxu@set@section@format{%
     \ctexset{%
       chapter = {
-        beforeskip = 20bp,
-        afterskip  = 28bp,
+        beforeskip = 28bp,
+        afterskip  = 26bp,
         %number     = \thechapter,
       },
       section = {
-        beforeskip = 18bp,
-        afterskip  = 14bp,
+        beforeskip = 28bp,
+        afterskip  = 12bp,
       },
       subsection = {
         beforeskip = 12bp,
-        afterskip  = 12bp,
+        afterskip  = 6bp,
       },
       subsubsection = {
         beforeskip = 12bp,
@@ -1838,11 +1838,11 @@
           %number      = \zhnumber{\thechapter}
         },
         section = {
-          format     = \sffamily\fontsize{14bp}{14bp}\selectfont\bfseries,
+          format     = \sffamily\fontsize{14bp}{20bp}\selectfont\bfseries,
           aftername  = \quad,
         },
         subsection = {
-          format     = \sffamily\fontsize{12bp}{12bp}\selectfont\bfseries,
+          format     = \sffamily\fontsize{12bp}{20bp}\selectfont\bfseries,
           aftername  = \quad,
         },
         subsubsection = {
@@ -2062,20 +2062,20 @@
     % default = {土木与水利工程学院},
   },
 }
-\nxu@option@hook{discipline}{%
-  \ifnxu@degree@type@professional
-    \nxu@warning{`discipline' for professional degree is deprecated. Use `professional-field' instead.}
-    \let\nxu@professional@field\nxu@discipline
-    \let\nxu@discipline\@empty
-  \fi
-}
-\nxu@option@hook{discipline*}{%
-  \ifnxu@degree@type@professional
-    \nxu@warning{`discipline*' for professional degree is deprecated. Use `professional-field*' instead.}
-    \let\nxu@professional@field@en\nxu@discipline@en
-    \let\nxu@discipline@en\@empty
-  \fi
-}
+% \nxu@option@hook{discipline}{%
+%   \ifnxu@degree@type@professional
+%     \nxu@warning{`discipline' for professional degree is deprecated. Use `professional-field' instead.}
+%     \let\nxu@professional@field\nxu@discipline
+%     \let\nxu@discipline\@empty
+%   \fi
+% }
+% \nxu@option@hook{discipline*}{%
+%   \ifnxu@degree@type@professional
+%     \nxu@warning{`discipline*' for professional degree is deprecated. Use `professional-field*' instead.}
+%     \let\nxu@professional@field@en\nxu@discipline@en
+%     \let\nxu@discipline@en\@empty
+%   \fi
+% }
 \nxu@define@key{
   professional-field = {
     name    = professional@field,
@@ -2112,6 +2112,14 @@
       true,
     },
     default = false,
+  },
+  blind-review = {
+	name = blind@review,
+	choices = {
+	  false,
+	  true,
+	},
+	default = false,
   },
 }
 \newcommand\nxu@format@date[2]{%
@@ -2225,7 +2233,9 @@
     \nxu@titlepage@name
     \vskip 0.68cm
     \nxu@title@page@degree@category\par
-    \nxu@title@page@degree@field\par
+    \ifnxu@blind@review@false
+      \nxu@title@page@degree@field\par
+    \fi
     \vskip 0.6cm
     \begingroup
       \cusong\bfseries\fontsize{22bp}{30bp}\selectfont
@@ -2241,7 +2251,7 @@
     \vskip 42pt%
     \nxu@titlepage@date
     \vskip 20pt%
-    \fi
+    %\fi
   \endgroup
   \clearpage
   \restoregeometry
@@ -2263,7 +2273,13 @@
 \newcommand\nxu@titlepage@topinfo{
 	\nxu@titlepage@topinfo@tabular{3em}{4em}{1em}{
 	  \nxu@topinfo@iteml{分类号}{\nxu@clc}
-	  \nxu@topinfo@iteml{密级}{\nxu@secret@level}
+    \ifnxu@blind@review@true
+      \empty
+    \else
+      \ifnxu@blind@review@false
+	      \nxu@topinfo@iteml{密级}{\nxu@secret@level}
+      \fi
+    \fi
 	}{
 	  \nxu@topinfo@itemr{单位代码}{\nxu@code}
 	  \nxu@topinfo@itemr{}{}
@@ -2301,12 +2317,31 @@
       \renewcommand\CJKglue{\hspace{1bp}}%
     \fi
     \ifnxu@thesis@type@thesis
-    	\ifnxu@degree@master
-    		硕士学位论文
-    	\else
-    		\ifnxu@degree@doctor
-    			博士学位论文
-    	\fi
+      \ifnxu@blind@review@true
+        \ifnxu@degree@master
+          \ifnxu@degree@type@academic
+            硕士学位论文
+          \else
+            \ifnxu@degree@type@professional
+              专业硕士学位论文
+            \fi
+          \fi
+        \else
+          \ifnxu@degree@doctor
+            博士学位论文
+          \fi
+        \fi
+      \else
+        \ifnxu@blind@review@false
+          \ifnxu@degree@master
+            硕士学位论文
+          \else
+            \ifnxu@degree@doctor
+              博士学位论文
+            \fi
+          \fi
+        \fi
+      \fi
     \fi
     \par
   \endgroup
@@ -2333,21 +2368,33 @@
 	\endgroup
 }
 \newcommand\nxu@titlepage@info{%
-  \nxu@titlepage@info@tabular{0.0cm}{2.54cm}{2.44cm}{0.60cm}{%
-  	\nxu@info@item{姓名}{}{\nxu@author}%
-  	\nxu@info@item{学号}{}{\sihao\nxu@student@id}%
-  	\nxu@info@item{指导教师}{\nxu@name@title}{\nxu@supervisor}%
-  	\nxu@info@item{合作导师}{\nxu@name@title}{\nxu@co@supervisor}%
-  	\ifnxu@degree@type@academic
-  		\nxu@info@item{学院}{}{\nxu@department}%
-  		\nxu@info@item{专业}{}{\nxu@discipline}%
-  	\else
-  		\nxu@info@item{培养单位}{}{\nxu@department}%
-  		\nxu@info@item{专业领域}{}{\nxu@discipline}%
-  	\fi
-  	\nxu@info@item{研究方向}{}{\nxu@field}%
-    \nxu@info@item{申请学位}{}{\nxu@degree@category}%
-  }\par
+  \ifnxu@blind@review@true
+	  \nxu@titlepage@info@tabular{0.0cm}{2.54cm}{2.44cm}{0.60cm}{%
+	  	\nxu@info@item{学号}{}{\sihao\nxu@student@id}%
+	  	\nxu@info@item{学院}{}{\nxu@department}%
+	  	\nxu@info@item{专业}{}{\nxu@discipline}%
+	  	\nxu@info@item{研究方向}{}{\nxu@field}%
+	  	\nxu@info@item{申请学位}{}{\nxu@degree@category}%
+	  }\par
+  \else
+	  \ifnxu@blind@review@false
+		  \nxu@titlepage@info@tabular{0.0cm}{2.54cm}{2.44cm}{0.60cm}{%
+		  	\nxu@info@item{姓名}{}{\nxu@author}%
+		  	\nxu@info@item{学号}{}{\sihao\nxu@student@id}%
+		  	\nxu@info@item{指导教师}{\nxu@name@title}{\nxu@supervisor}%
+		  	\nxu@info@item{合作导师}{\nxu@name@title}{\nxu@co@supervisor}%
+		  	\ifnxu@degree@type@academic
+		  		\nxu@info@item{学院}{}{\nxu@department}%
+		  		\nxu@info@item{专业}{}{\nxu@discipline}%
+		  	\else
+		  		\nxu@info@item{培养单位}{}{\nxu@department}%
+		  		\nxu@info@item{专业领域}{}{\nxu@discipline}%
+		  	\fi
+		  	\nxu@info@item{研究方向}{}{\nxu@field}%
+		    \nxu@info@item{申请学位}{}{\nxu@degree@category}%
+		  }\par
+	 \fi
+  \fi
 }
 \newcommand\nxu@titlepage@info@tabular[5]{%
   \def\nxu@info@item##1##2##3{%
@@ -2384,13 +2431,19 @@
 			\sffamily\bfseries\fontsize{16bp}{30bp}\selectfont
 			\nxu@titlepage@en@degree\par
 		\endgroup
-		\vskip 4.5cm
+		\vskip 3.5cm
 		\nxu@titlepage@en@title
 		\vfill
-		\begingroup
-			\fontsize{16bp}{24bp}\selectfont
-			\nxu@titlepage@en@info
-		\endgroup
+    \ifnxu@blind@review@true
+      \empty
+    \else
+      \ifnxu@blind@review@true
+        \begingroup
+          \fontsize{16bp}{24bp}\selectfont
+          \nxu@titlepage@en@info
+        \endgroup
+      \fi
+    \fi
 		\vskip 5.0cm
 		\nxu@titlepage@en@address
 	\endgroup
@@ -2418,7 +2471,7 @@
 	\endgroup
 }
 \newcommand\nxu@titlepage@en@info{%
-	\nxu@titlepage@en@info@tabular{8em}{0.5em}{8em}{
+	\nxu@titlepage@en@info@tabular{3.6em}{0.5em}{8em}{
 		\nxu@titlepage@en@info@item{Author}{\nxu@author@en}
 		\nxu@titlepage@en@info@item{Supervisor}{\nxu@supervisor@en}
 	}\par
@@ -3274,13 +3327,13 @@
     \setlist[achievements]{
       topsep     = 6bp,
       itemsep    = 6bp,
-      leftmargin = 1cm,
+      leftmargin = 1.1cm,
       labelwidth = 1cm,
       labelsep   = 0pt,
       first      = {\fontsize{10.5bp}{14bp}\selectfont},
       align      = left,
       label      = [\arabic*],
-      resume     = achievements,
+      %resume     = achievements,  % 继续之前的列表编号
     }%
   \else
     \ctexset{
@@ -3299,7 +3352,7 @@
       labelsep   = 0.5cm,
       align      = right,
       label      = [\arabic*],
-      resume     = achievements,
+      %resume     = achievements,  % 继续之前的列表编号
     }%
   \fi
 }{}

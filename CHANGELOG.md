@@ -4,6 +4,16 @@
 
 点击版本号即可在 GitHub 上查看相邻版本间的代码变动。
 
+## [v2.1.0] - 2026-04-15
+
+### Added
+
+- 新增盲审版专用封面
+
+### Changed
+
+- 修复了专业硕士封面专业领域缺失问题
+
 ## [v2.0.0] - 2025-03-28
 
 ### Added
@@ -27,5 +37,6 @@
 
 ## [v1.0.0] - 2024-05-20
 
+[v2.1.0]:       https://github.com/baoxianyuan/NXUThesis/compare/v1.0.0...v2.1.0
 [v2.0.0]:       https://github.com/baoxianyuan/NXUThesis/compare/v1.0.0...v2.0.0
 [v1.0.0]:       https://github.com/baoxianyuan/NXUThesis/releases/tag/v-1.0.0
